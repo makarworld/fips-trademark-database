@@ -7,7 +7,7 @@
 [![Formats](https://img.shields.io/badge/Formats-Postgres%20%7C%20ClickHouse%20%7C%20Parquet%20%7C%20JSON%20%7C%20CSV-amber?style=for-the-badge)](https://makarworld.github.io/fips-trademark-database/)
 [![Updated](https://img.shields.io/badge/Updated-September%202026-success?style=for-the-badge)](https://makarworld.github.io/fips-trademark-database/)
 
-> 🌐 **Официальный сайт и интерактивный сэмпл:** [makarworld.github.io/fips-trademark-database](https://makarworld.github.io/fips-trademark-database/)  
+> 🌐 **Официальный сайт и интерактивный сэмпл (100 записей):** [makarworld.github.io/fips-trademark-database](https://makarworld.github.io/fips-trademark-database/)  
 > 💬 **Связаться и запросить бесплатный сэмпл / купить базу:** Telegram [@abuztrade](https://t.me/abuztrade)
 
 ---

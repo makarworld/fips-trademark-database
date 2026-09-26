@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Купить базу товарных знаков РФ и ФИПС — Полная выгрузка реестров (PostgreSQL, ClickHouse, Parquet, JSON, CSV)</title>
 
   <!-- Primary Meta Tags -->
@@ -29,7 +29,7 @@
   <meta property="twitter:description" content="Готовая база данных товарных знаков ФИПС: RUTM, WKTM, WOTM, RUTMAP. Дампы PostgreSQL, ClickHouse, Parquet, JSON, CSV.">
   <meta property="twitter:image" content="https://makarworld.github.io/fips-trademark-database/favicon.svg">
 
-  <!-- Schema.org Structured Data: Dataset & Product & FAQPage -->
+  <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -60,26 +60,10 @@
         "spatialCoverage": "RU",
         "temporalCoverage": "1990/2026",
         "distribution": [
-          {
-            "@type": "DataDownload",
-            "encodingFormat": "application/sql",
-            "name": "PostgreSQL Dump"
-          },
-          {
-            "@type": "DataDownload",
-            "encodingFormat": "application/x-parquet",
-            "name": "Apache Parquet"
-          },
-          {
-            "@type": "DataDownload",
-            "encodingFormat": "application/json",
-            "name": "JSON / JSONL"
-          },
-          {
-            "@type": "DataDownload",
-            "encodingFormat": "text/csv",
-            "name": "CSV / TSV"
-          }
+          { "@type": "DataDownload", "encodingFormat": "application/sql", "name": "PostgreSQL Dump" },
+          { "@type": "DataDownload", "encodingFormat": "application/x-parquet", "name": "Apache Parquet" },
+          { "@type": "DataDownload", "encodingFormat": "application/json", "name": "JSON / JSONL" },
+          { "@type": "DataDownload", "encodingFormat": "text/csv", "name": "CSV / TSV" }
         ]
       },
       {
@@ -92,8 +76,8 @@
           "@type": "AggregateOffer",
           "priceCurrency": "RUB",
           "offerCount": "3",
-          "lowPrice": "15000",
-          "highPrice": "150000",
+          "lowPrice": "10000",
+          "highPrice": "100000",
           "priceValidUntil": "2027-12-31",
           "availability": "https://schema.org/InStock",
           "url": "https://t.me/abuztrade"
@@ -150,8 +134,8 @@
     :root {
       --bg: #090d16;
       --bg-surface: #0f172a;
-      --bg-card: #141e33;
-      --bg-card-hover: #1a2744;
+      --bg-card: #131c31;
+      --bg-card-hover: #192542;
       --border: rgba(255, 255, 255, 0.08);
       --border-accent: rgba(99, 102, 241, 0.4);
       --primary: #3b82f6;
@@ -177,29 +161,26 @@
       padding: 0;
     }
 
+    /* Seamless ambient body background - NO clipping, NO stripe */
     body {
       background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 90% 45% at 50% -10%, rgba(99, 102, 241, 0.16) 0%, rgba(59, 130, 246, 0.05) 45%, transparent 75%),
+        radial-gradient(ellipse 60% 40% at 85% 60%, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 15% 85%, rgba(37, 99, 235, 0.06) 0%, transparent 60%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: var(--text);
       font-family: var(--font);
       line-height: 1.6;
       overflow-x: hidden;
+      width: 100%;
+      min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Ambient background glow */
-    .glow-bg {
-      position: fixed;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1000px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(59, 130, 246, 0.08) 40%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
     .container {
+      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
@@ -209,12 +190,13 @@
 
     /* Header / Nav */
     header {
-      padding: 24px 0;
+      padding: 18px 0;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: rgba(9, 13, 22, 0.85);
+      background: rgba(9, 13, 22, 0.88);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       z-index: 100;
     }
 
@@ -236,21 +218,22 @@
     }
 
     .logo svg {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 24px;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 500;
       transition: color 0.2s;
     }
@@ -265,13 +248,14 @@
       gap: 8px;
       background: linear-gradient(135deg, #2563eb, #4f46e5);
       color: #fff;
-      padding: 10px 20px;
+      padding: 9px 18px;
       border-radius: var(--radius-full);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       box-shadow: 0 4px 14px var(--primary-glow);
       transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
     }
 
     .nav-cta:hover {
@@ -281,7 +265,7 @@
 
     /* Hero Section */
     .hero {
-      padding: 80px 0 60px;
+      padding: 70px 0 50px;
       text-align: center;
     }
 
@@ -297,6 +281,7 @@
       font-weight: 600;
       color: #a5b4fc;
       margin-bottom: 24px;
+      max-width: 100%;
     }
 
     .badge-pulse {
@@ -306,6 +291,7 @@
       border-radius: 50%;
       box-shadow: 0 0 8px var(--success);
       animation: pulse 2s infinite;
+      flex-shrink: 0;
     }
 
     @keyframes pulse {
@@ -315,7 +301,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-size: clamp(2rem, 5vw, 3.8rem);
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.03em;
@@ -332,10 +318,10 @@
     }
 
     .hero-subtitle {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-size: clamp(1rem, 2vw, 1.22rem);
       color: var(--text-muted);
       max-width: 760px;
-      margin: 0 auto 36px;
+      margin: 0 auto 34px;
     }
 
     .hero-actions {
@@ -352,14 +338,19 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 14px 28px;
+      padding: 13px 26px;
       border-radius: var(--radius-full);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.98rem;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.2s ease;
       border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
     }
 
     .btn-primary {
@@ -387,7 +378,7 @@
     /* Stats Grid */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-bottom: 80px;
     }
@@ -396,7 +387,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 24px;
+      padding: 22px 20px;
       text-align: left;
       transition: transform 0.2s, border-color 0.2s;
     }
@@ -407,27 +398,27 @@
     }
 
     .stat-val {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #fff;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .stat-label {
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
     }
 
     /* Section Headers */
     .section-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 46px;
     }
 
     .section-tag {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #60a5fa;
@@ -437,7 +428,7 @@
     }
 
     .section-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: 14px;
@@ -447,7 +438,7 @@
       color: var(--text-muted);
       max-width: 680px;
       margin: 0 auto;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
     }
 
     /* Formats Grid */
@@ -467,7 +458,6 @@
       flex-direction: column;
       gap: 12px;
       position: relative;
-      overflow: hidden;
     }
 
     .format-badge {
@@ -484,7 +474,7 @@
     }
 
     .format-title {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 700;
       color: #fff;
     }
@@ -504,7 +494,7 @@
     }
 
     .registry-box {
-      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(20, 30, 51, 0.5) 100%);
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(19, 28, 49, 0.6) 100%);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 24px;
@@ -512,7 +502,7 @@
 
     .reg-code {
       font-family: var(--font-mono);
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: #60a5fa;
       margin-bottom: 8px;
@@ -529,17 +519,17 @@
       color: var(--text-muted);
     }
 
-    /* Live Interactive Sample Table */
+    /* Interactive Sample Section */
     .sample-section {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 36px;
+      padding: 32px;
       margin-bottom: 90px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
     }
 
-    .sample-controls {
+    .sample-header-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -548,10 +538,62 @@
       margin-bottom: 24px;
     }
 
+    .view-toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      padding: 4px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+    }
+
+    .view-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .view-toggle-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .sample-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .controls-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
     .filter-pills {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-pills::-webkit-scrollbar {
+      display: none;
     }
 
     .filter-pill {
@@ -560,10 +602,12 @@
       color: var(--text-muted);
       padding: 6px 14px;
       border-radius: var(--radius-full);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
       font-weight: 600;
+      white-space: nowrap;
       transition: all 0.2s;
+      flex-shrink: 0;
     }
 
     .filter-pill.active, .filter-pill:hover {
@@ -572,20 +616,37 @@
       border-color: var(--primary);
     }
 
+    .search-input-wrap {
+      position: relative;
+      flex-grow: 1;
+      max-width: 400px;
+      min-width: 260px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
     .search-input {
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 8px 16px;
+      padding: 9px 16px 9px 38px;
       border-radius: var(--radius-full);
       font-size: 0.9rem;
       outline: none;
-      min-width: 260px;
-      transition: border-color 0.2s;
+      width: 100%;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .search-input:focus {
       border-color: #60a5fa;
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
     }
 
     .table-container {
@@ -593,18 +654,19 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       background: var(--bg);
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
     th {
       background: rgba(255, 255, 255, 0.03);
-      padding: 14px 18px;
+      padding: 13px 16px;
       font-weight: 600;
       color: var(--text-muted);
       border-bottom: 1px solid var(--border);
@@ -612,7 +674,7 @@
     }
 
     td {
-      padding: 14px 18px;
+      padding: 13px 16px;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
     }
@@ -625,12 +687,53 @@
       background: rgba(255, 255, 255, 0.02);
     }
 
+    /* Cards view for sample data */
+    .sample-cards-grid {
+      display: none;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .sample-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .sample-item-card:hover {
+      border-color: var(--border-accent);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .sample-item-card:active {
+      transform: scale(0.99);
+    }
+
+    .card-row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-mark-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
     .badge-status {
       display: inline-block;
       padding: 3px 8px;
       border-radius: var(--radius-sm);
-      font-size: 0.75rem;
+      font-size: 0.73rem;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     .badge-active {
@@ -645,6 +748,22 @@
       border: 1px solid rgba(245, 158, 11, 0.3);
     }
 
+    .sample-pagination-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sample-count-info {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
     /* Use cases */
     .use-cases-grid {
       display: grid;
@@ -657,7 +776,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 28px;
+      padding: 26px;
     }
 
     .case-icon {
@@ -668,20 +787,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #818cf8;
       font-size: 1.4rem;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .case-title {
-      font-size: 1.25rem;
+      font-size: 1.22rem;
       font-weight: 700;
       margin-bottom: 10px;
     }
 
     .case-desc {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }
 
     /* Pricing Plans */
@@ -696,7 +814,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 36px 28px;
+      padding: 34px 26px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -704,7 +822,7 @@
 
     .plan-card.featured {
       border-color: #6366f1;
-      background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, var(--bg-card) 60%);
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.12) 0%, var(--bg-card) 60%);
       box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
     }
 
@@ -721,30 +839,31 @@
       letter-spacing: 0.05em;
       padding: 4px 14px;
       border-radius: var(--radius-full);
+      white-space: nowrap;
     }
 
     .plan-name {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
       margin-bottom: 6px;
     }
 
     .plan-desc {
       color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 24px;
-      min-height: 42px;
+      font-size: 0.88rem;
+      margin-bottom: 22px;
+      min-height: 40px;
     }
 
     .plan-price {
-      font-size: 2.4rem;
+      font-size: 2.3rem;
       font-weight: 800;
       color: #fff;
       margin-bottom: 24px;
     }
 
     .plan-price span {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 500;
       color: var(--text-muted);
     }
@@ -754,7 +873,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 30px;
       flex-grow: 1;
     }
 
@@ -762,7 +881,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: #cbd5e1;
     }
 
@@ -786,19 +905,21 @@
     }
 
     .faq-question {
-      padding: 20px 24px;
+      padding: 18px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
       font-weight: 600;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       user-select: none;
+      gap: 12px;
     }
 
     .faq-icon {
       font-size: 1.2rem;
       transition: transform 0.2s;
+      flex-shrink: 0;
     }
 
     .faq-item.open .faq-icon {
@@ -806,9 +927,10 @@
     }
 
     .faq-answer {
-      padding: 0 24px 20px;
+      padding: 0 22px 20px;
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
+      line-height: 1.6;
       display: none;
     }
 
@@ -818,10 +940,10 @@
 
     /* Banner CTA */
     .cta-banner {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(99, 102, 241, 0.25) 100%);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.22) 0%, rgba(99, 102, 241, 0.25) 100%);
       border: 1px solid var(--border-accent);
       border-radius: var(--radius-lg);
-      padding: 60px 40px;
+      padding: 56px 36px;
       text-align: center;
       margin-bottom: 90px;
       position: relative;
@@ -829,24 +951,24 @@
     }
 
     .cta-banner h2 {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
       font-weight: 800;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .cta-banner p {
       color: #cbd5e1;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       max-width: 650px;
-      margin: 0 auto 30px;
+      margin: 0 auto 28px;
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--border);
-      padding: 48px 0;
+      padding: 40px 0;
       color: var(--text-dim);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
     .footer-inner {
@@ -859,8 +981,9 @@
 
     .footer-links {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       list-style: none;
+      flex-wrap: wrap;
     }
 
     .footer-links a {
@@ -873,15 +996,178 @@
       color: var(--text);
     }
 
+    /* Mobile Sticky Bottom Bar */
+    .mobile-bottom-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+      z-index: 999;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .mobile-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .mobile-bar-price {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-bar-title {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .mobile-bar-val {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .mobile-bar-btn {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Responsive Media Queries */
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .sample-section { padding: 20px; }
-      .cta-banner { padding: 40px 20px; }
+      .nav-links {
+        display: none;
+      }
+
+      header {
+        padding: 14px 0;
+      }
+
+      .hero {
+        padding: 44px 0 36px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .sample-section {
+        padding: 20px 16px;
+      }
+
+      .sample-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .search-input-wrap {
+        max-width: 100%;
+        min-width: 100%;
+      }
+
+      .sample-pagination-bar {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+
+      .sample-pagination-bar div {
+        justify-content: center;
+      }
+
+      /* Switch default view to Cards on mobile */
+      .table-container {
+        display: none;
+      }
+
+      .sample-cards-grid {
+        display: grid;
+      }
+
+      .cta-banner {
+        padding: 36px 18px;
+      }
+
+      .mobile-bottom-bar {
+        display: block;
+      }
+
+      body {
+        padding-bottom: calc(65px + env(safe-area-inset-bottom, 0px));
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 14px;
+      }
+
+      .footer-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 16px 14px;
+      }
+
+      .stat-val {
+        font-size: 1.7rem;
+      }
+
+      .stat-label {
+        font-size: 0.78rem;
+      }
+
+      .hero h1 {
+        font-size: 1.85rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.92rem;
+      }
+
+      .search-input-wrap {
+        min-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="glow-bg"></div>
 
   <!-- Header -->
   <header>
@@ -913,7 +1199,7 @@
 
       <a href="https://t.me/abuztrade" target="_blank" rel="noopener noreferrer" class="nav-cta">
         <span>Купить базу</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </header>
@@ -938,12 +1224,12 @@
 
         <div class="hero-actions">
           <a href="https://t.me/abuztrade" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             <span>Запросить сэмпл и купить</span>
           </a>
           <a href="#sample" class="btn btn-secondary">
-            <span>Интерактивный просмотр</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+            <span>Интерактивный просмотр (100 сэмплов)</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
           </a>
         </div>
 
@@ -1058,25 +1344,44 @@
     <!-- Interactive Data Sample Section -->
     <section class="container" id="sample">
       <div class="sample-section">
-        <div class="section-header" style="margin-bottom: 24px;">
-          <span class="section-tag">Демонстрация структуры</span>
-          <h2 class="section-title" style="font-size: 2rem;">Интерактивный сэмпл базы данных</h2>
-          <p class="section-desc">Попробуйте поиск и фильтрацию по демонстрационному срезу данных</p>
+        <div class="sample-header-row">
+          <div>
+            <span class="section-tag" style="text-align: left;">Демонстрация структуры</span>
+            <h2 class="section-title" style="font-size: 1.85rem; text-align: left; margin-bottom: 4px;">Сэмпл базы данных (100 записей)</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">По 25 реальных записей из каждого из 4 реестров ФИПС</p>
+          </div>
+
+          <div class="view-toggle-wrap">
+            <button class="view-toggle-btn active" id="viewCardsBtn" title="Вид карточками">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span>Карточки</span>
+            </button>
+            <button class="view-toggle-btn" id="viewTableBtn" title="Вид таблицей">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              <span>Таблица</span>
+            </button>
+          </div>
         </div>
 
         <div class="sample-controls">
-          <div class="filter-pills">
-            <button class="filter-pill active" data-filter="ALL">Все реестры</button>
-            <button class="filter-pill" data-filter="RUTM">RUTM (РФ)</button>
-            <button class="filter-pill" data-filter="WKTM">WKTM (Общеизвестные)</button>
-            <button class="filter-pill" data-filter="RUTMAP">RUTMAP (Заявки)</button>
-            <button class="filter-pill" data-filter="WOTM">WOTM (Международные)</button>
-          </div>
+          <div class="controls-top">
+            <div class="filter-pills">
+              <button class="filter-pill active" data-filter="ALL">Все реестры (100)</button>
+              <button class="filter-pill" data-filter="RUTM">RUTM РФ (25)</button>
+              <button class="filter-pill" data-filter="WKTM">WKTM Общеизвестные (25)</button>
+              <button class="filter-pill" data-filter="RUTMAP">RUTMAP Заявки (25)</button>
+              <button class="filter-pill" data-filter="WOTM">WOTM Международные (25)</button>
+            </div>
 
-          <input type="text" id="sampleSearch" class="search-input" placeholder="Поиск по названию, правообладателю, номеру...">
+            <div class="search-input-wrap">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="sampleSearch" class="search-input" placeholder="Поиск по названию, владельцу, номеру, МКТУ...">
+            </div>
+          </div>
         </div>
 
-        <div class="table-container">
+        <!-- Table View container -->
+        <div class="table-container" id="tableContainer">
           <table>
             <thead>
               <tr>
@@ -1095,12 +1400,25 @@
           </table>
         </div>
 
-        <div style="margin-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-          <span style="color: var(--text-dim); font-size: 0.85rem;">* В полной базе доступно более 25 дополнительных ИНИД-полей и прямые ссылки на вложения.</span>
-          <a href="sample.json" download="fips_sample.json" class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            <span>Скачать пример JSON (sample.json)</span>
-          </a>
+        <!-- Cards View container (Super slick on mobile!) -->
+        <div class="sample-cards-grid" id="cardsContainer">
+          <!-- Dynamically populated from sample.json -->
+        </div>
+
+        <!-- Pagination & count bar -->
+        <div class="sample-pagination-bar">
+          <div class="sample-count-info" id="sampleCountInfo">
+            Загрузка выборки...
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button id="showMoreBtn" class="btn btn-secondary" style="padding: 7px 16px; font-size: 0.85rem;">
+              <span>Показать еще (+15)</span>
+            </button>
+            <a href="sample.json" download="fips_sample_100.json" class="btn btn-secondary" style="padding: 7px 16px; font-size: 0.85rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <span>Скачать весь sample.json</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1141,7 +1459,7 @@
         <div class="case-card">
           <div class="case-icon">🏦</div>
           <h3 class="case-title">Финтех и скоринг</h3>
-          <p class="case-desc">Оценка нематериальных активов компаний при выдаче кредитов, M&A сделках,Due Diligence и оценке капитализации технологического бизнеса.</p>
+          <p class="case-desc">Оценка нематериальных активов компаний при выдаче кредитов, M&A сделках, Due Diligence и оценке капитализации технологического бизнеса.</p>
         </div>
 
         <div class="case-card">
@@ -1164,7 +1482,7 @@
         <div class="plan-card">
           <div class="plan-name">Стандартный срез</div>
           <div class="plan-desc">Единоразовый срез базы данных для локального анализа и интеграций.</div>
-          <div class="plan-price">от 35 000 ₽ <span>/ срез</span></div>
+          <div class="plan-price">от 10 000 ₽ <span>/ срез</span></div>
           <ul class="plan-features">
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1190,7 +1508,7 @@
           <span class="featured-label">Популярный выбор</span>
           <div class="plan-name">Все 4 Реестра PRO</div>
           <div class="plan-desc">Полный массив всех товарных знаков, заявок и общеизвестных брендов.</div>
-          <div class="plan-price">от 75 000 ₽ <span>/ дамп</span></div>
+          <div class="plan-price">от 30 000 ₽ <span>/ дамп</span></div>
           <ul class="plan-features">
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1298,13 +1616,27 @@
       <div class="cta-banner">
         <h2>Готовы получить базу товарных знаков?</h2>
         <p>Свяжитесь с нами прямо сейчас. Предоставим демонстрационный срез, схему таблиц и ответим на все технические вопросы.</p>
-        <a href="https://t.me/abuztrade" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 1.1rem; padding: 16px 36px;">
+        <a href="https://t.me/abuztrade" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 1.05rem; padding: 15px 34px;">
           <span>Связаться в Telegram (@abuztrade)</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </a>
       </div>
     </section>
   </main>
+
+  <!-- Mobile Floating Sticky Bottom Bar -->
+  <aside class="mobile-bottom-bar" aria-label="Быстрый контакт">
+    <div class="mobile-bar-inner">
+      <div class="mobile-bar-price">
+        <span class="mobile-bar-title">База ФИПС (3.3M+)</span>
+        <span class="mobile-bar-val">от 10 000 ₽</span>
+      </div>
+      <a href="https://t.me/abuztrade" target="_blank" rel="noopener noreferrer" class="mobile-bar-btn">
+        <span>Купить в Telegram</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </aside>
 
   <!-- Footer -->
   <footer>
@@ -1315,8 +1647,8 @@
       </div>
       <ul class="footer-links">
         <li><a href="https://github.com/makarworld/fips-trademark-database" target="_blank" rel="noopener noreferrer">GitHub репозиторий</a></li>
-        <li><a href="sample.json">Sample Data</a></li>
-        <li><a href="https://t.me/abuztrade" target="_blank" rel="noopener noreferrer">Telegram Contact</a></li>
+        <li><a href="sample.json">Sample Data (100)</a></li>
+        <li><a href="https://t.me/abuztrade" target="_blank" rel="noopener noreferrer">Telegram @abuztrade</a></li>
       </ul>
     </div>
   </footer>
@@ -1325,26 +1657,62 @@
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       let sampleData = [];
+      const PAGE_SIZE = 15;
+      let visibleLimit = PAGE_SIZE;
 
       try {
         const res = await fetch('sample.json');
         sampleData = await res.json();
       } catch (e) {
-        console.warn('Failed to fetch sample.json directly, fallback data loaded', e);
+        console.warn('Failed to fetch sample.json', e);
       }
 
       const tbody = document.getElementById('sampleTableBody');
+      const cardsContainer = document.getElementById('cardsContainer');
+      const tableContainer = document.getElementById('tableContainer');
       const searchInput = document.getElementById('sampleSearch');
       const filterPills = document.querySelectorAll('.filter-pill');
+      const sampleCountInfo = document.getElementById('sampleCountInfo');
+      const showMoreBtn = document.getElementById('showMoreBtn');
+      const viewCardsBtn = document.getElementById('viewCardsBtn');
+      const viewTableBtn = document.getElementById('viewTableBtn');
 
       let currentFilter = 'ALL';
       let currentQuery = '';
+      let isCardView = window.innerWidth <= 768;
 
-      function renderTable() {
-        if (!tbody) return;
-        tbody.innerHTML = '';
+      function updateViewToggleState() {
+        if (isCardView) {
+          viewCardsBtn.classList.add('active');
+          viewTableBtn.classList.remove('active');
+          cardsContainer.style.display = 'grid';
+          tableContainer.style.display = 'none';
+        } else {
+          viewTableBtn.classList.add('active');
+          viewCardsBtn.classList.remove('active');
+          tableContainer.style.display = 'block';
+          cardsContainer.style.display = 'none';
+        }
+      }
 
-        const filtered = sampleData.filter(item => {
+      updateViewToggleState();
+
+      viewCardsBtn.addEventListener('click', () => {
+        isCardView = true;
+        updateViewToggleState();
+      });
+
+      viewTableBtn.addEventListener('click', () => {
+        isCardView = false;
+        updateViewToggleState();
+      });
+
+      window.addEventListener('resize', () => {
+        // Auto-switch view on major breakpoint only if user hasn't explicitly locked it
+      });
+
+      function getFilteredData() {
+        return sampleData.filter(item => {
           const matchFilter = (currentFilter === 'ALL' || item.registry === currentFilter);
           if (!matchFilter) return false;
           if (!currentQuery) return true;
@@ -1353,57 +1721,125 @@
           return (
             (item.mark_name && item.mark_name.toLowerCase().includes(q)) ||
             (item.holder && item.holder.toLowerCase().includes(q)) ||
-            (item.record_number && item.record_number.includes(q)) ||
+            (item.record_number && item.record_number.toLowerCase().includes(q)) ||
+            (item.app_number && item.app_number.toLowerCase().includes(q)) ||
             (item.mktu_classes && item.mktu_classes.toLowerCase().includes(q))
           );
         });
+      }
 
-        if (filtered.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-dim); padding: 30px;">Ничего не найдено по вашему запросу</td></tr>';
-          return;
+      function render() {
+        const filtered = getFilteredData();
+        const displayed = filtered.slice(0, visibleLimit);
+
+        // Update count info
+        if (sampleCountInfo) {
+          sampleCountInfo.innerText = `Показано ${displayed.length} из ${filtered.length} записей (всего в выборке: ${sampleData.length})`;
         }
 
-        filtered.forEach(item => {
-          const tr = document.createElement('tr');
-          const isPending = item.status === 'на экспертизе';
-          const statusBadge = isPending
-            ? `<span class="badge-status badge-pending">На экспертизе</span>`
-            : `<span class="badge-status badge-active">Действует</span>`;
+        // Show/hide Show More button
+        if (showMoreBtn) {
+          if (visibleLimit >= filtered.length) {
+            showMoreBtn.style.display = 'none';
+          } else {
+            showMoreBtn.style.display = 'inline-flex';
+          }
+        }
 
-          const numberDisplay = item.reg_number
-            ? `<strong>№ ${item.reg_number}</strong>`
-            : `<span style="color: var(--text-muted);">Заявка № ${item.app_number}</span>`;
+        // 1. Render Table
+        if (tbody) {
+          tbody.innerHTML = '';
+          if (displayed.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-dim); padding: 30px;">Ничего не найдено по вашему запросу</td></tr>';
+          } else {
+            displayed.forEach(item => {
+              const tr = document.createElement('tr');
+              const isPending = item.status === 'на экспертизе';
+              const statusBadge = isPending
+                ? `<span class="badge-status badge-pending">На экспертизе</span>`
+                : `<span class="badge-status badge-active">Действует</span>`;
 
-          tr.innerHTML = `
-            <td><strong style="color: #60a5fa; font-family: var(--font-mono);">${item.registry}</strong></td>
-            <td>${numberDisplay}</td>
-            <td><strong>${item.mark_name || '—'}</strong></td>
-            <td>${statusBadge}</td>
-            <td style="max-width: 250px;">${item.holder || '—'}</td>
-            <td style="max-width: 200px; font-size: 0.85rem; color: var(--text-muted);">${item.mktu_classes || '—'}</td>
-            <td>${item.expiry_date || '—'}</td>
-          `;
-          tbody.appendChild(tr);
+              const numberDisplay = item.reg_number
+                ? `<strong>№ ${item.reg_number}</strong>`
+                : `<span style="color: var(--text-muted);">Заявка № ${item.app_number}</span>`;
+
+              tr.innerHTML = `
+                <td><strong style="color: #60a5fa; font-family: var(--font-mono);">${item.registry}</strong></td>
+                <td>${numberDisplay}</td>
+                <td><strong>${item.mark_name || '—'}</strong></td>
+                <td>${statusBadge}</td>
+                <td style="max-width: 250px;">${item.holder || '—'}</td>
+                <td style="max-width: 200px; font-size: 0.84rem; color: var(--text-muted);">${item.mktu_classes || '—'}</td>
+                <td style="white-space: nowrap;">${item.expiry_date || '—'}</td>
+              `;
+              tbody.appendChild(tr);
+            });
+          }
+        }
+
+        // 2. Render Cards (Mobile view)
+        if (cardsContainer) {
+          cardsContainer.innerHTML = '';
+          if (displayed.length === 0) {
+            cardsContainer.innerHTML = '<div style="text-align: center; color: var(--text-dim); padding: 30px;">Ничего не найдено по вашему запросу</div>';
+          } else {
+            displayed.forEach(item => {
+              const card = document.createElement('div');
+              card.className = 'sample-item-card';
+
+              const isPending = item.status === 'на экспертизе';
+              const statusBadge = isPending
+                ? `<span class="badge-status badge-pending">На экспертизе</span>`
+                : `<span class="badge-status badge-active">Действует</span>`;
+
+              const numLabel = item.reg_number
+                ? `Свидетельство № ${item.reg_number}`
+                : `Заявка № ${item.app_number}`;
+
+              card.innerHTML = `
+                <div class="card-row-top">
+                  <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.12); padding: 2px 8px; border-radius: var(--radius-sm);">${item.registry}</span>
+                  ${statusBadge}
+                </div>
+                <div class="card-mark-title">${item.mark_name || 'Без наименования'}</div>
+                <div style="font-size: 0.82rem; color: #94a3b8;">${numLabel} • ${item.app_date || ''}</div>
+                <div style="font-size: 0.85rem; color: #cbd5e1;"><strong style="color: #64748b;">Владелец:</strong> ${item.holder || '—'}</div>
+                <div style="font-size: 0.82rem; color: var(--text-dim);"><strong style="color: #64748b;">МКТУ:</strong> ${item.mktu_classes || '—'}</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 4px;">Срок охраны: ${item.expiry_date || '—'}</div>
+              `;
+              cardsContainer.appendChild(card);
+            });
+          }
+        }
+      }
+
+      render();
+
+      // Show more handler
+      if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', () => {
+          visibleLimit += PAGE_SIZE;
+          render();
         });
       }
 
-      renderTable();
-
-      // Search event
+      // Search input handler
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
           currentQuery = e.target.value;
-          renderTable();
+          visibleLimit = PAGE_SIZE;
+          render();
         });
       }
 
-      // Filter events
+      // Filter pills handler
       filterPills.forEach(pill => {
         pill.addEventListener('click', () => {
           filterPills.forEach(p => p.classList.remove('active'));
           pill.classList.add('active');
           currentFilter = pill.getAttribute('data-filter') || 'ALL';
-          renderTable();
+          visibleLimit = PAGE_SIZE;
+          render();
         });
       });
 
