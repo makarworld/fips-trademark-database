@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Купить базу товарных знаков РФ и ФИПС — Полная выгрузка реестров (PostgreSQL, ClickHouse, Parquet, JSON, CSV)</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Купить базу товарных знаков РФ и ФИПС — Полная выгрузка реестров">
+  <meta name="description" content="Полная актуальная база данных товарных знаков Роспатент / ФИПС (RUTM, WKTM, WOTM, RUTMAP). Более 3.3 млн записей, 10 млн PDF и логотипов, 45 классов МКТУ. Форматы: PostgreSQL, ClickHouse, JSON, Parquet, CSV.">
+  <meta name="keywords" content="купить базу товарных знаков, база данных фипс, реестр товарных знаков рф, выгрузка роспатент, база товарных знаков postgresql, база патентов clickhouse, товарные знаки parquet json csv, проверка товарных знаков база, роспатент выгрузка реестра, база брендов рф, мкту классификатор">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="FIPS Trademark Data Hub">
+  <link rel="canonical" href="https://makarworld.github.io/fips-trademark-database/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://makarworld.github.io/fips-trademark-database/">
+  <meta property="og:title" content="Купить полную базу товарных знаков РФ и ФИПС — Актуальная выгрузка">
+  <meta property="og:description" content="3.3M+ записей товарных знаков и заявок, 10M+ документов и логотипов. Полная очищенная структура с ИНИД и МКТУ. Доступно в PostgreSQL, ClickHouse, JSON, Parquet, CSV.">
+  <meta property="og:image" content="https://makarworld.github.io/fips-trademark-database/favicon.svg">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://makarworld.github.io/fips-trademark-database/">
+  <meta property="twitter:title" content="База товарных знаков РФ и ФИПС — 3.3M+ записей">
+  <meta property="twitter:description" content="Готовая база данных товарных знаков ФИПС: RUTM, WKTM, WOTM, RUTMAP. Дампы PostgreSQL, ClickHouse, Parquet, JSON, CSV.">
+  <meta property="twitter:image" content="https://makarworld.github.io/fips-trademark-database/favicon.svg">
+
+  <!-- Schema.org Structured Data: Dataset & Product & FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://makarworld.github.io/fips-trademark-database/#organization",
+        "name": "FIPS Trademark Data Hub",
+        "url": "https://makarworld.github.io/fips-trademark-database/",
+        "logo": "https://makarworld.github.io/fips-trademark-database/favicon.svg",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "url": "https://t.me/makarworld"
+        }
+      },
+      {
+        "@type": "Dataset",
+        "@id": "https://makarworld.github.io/fips-trademark-database/#dataset",
+        "name": "Полная база данных товарных знаков и заявок ФИПС РФ",
+        "description": "Исчерпывающий датасет всех зарегистрированных товарных знаков, общеизвестных брендов, международных обозначений и открытых заявок Роспатента (ФИПС). Содержит более 3.3 млн карточек, классы МКТУ, реквизиты правообладателей, ИНИД коды, даты и статусы.",
+        "url": "https://makarworld.github.io/fips-trademark-database/",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "keywords": ["товарные знаки", "роспатент", "фипс", "бренды", "патенты", "мкту", "интеллектуальная собственность"],
+        "creator": {
+          "@id": "https://makarworld.github.io/fips-trademark-database/#organization"
+        },
+        "spatialCoverage": "RU",
+        "temporalCoverage": "1990/2026",
+        "distribution": [
+          {
+            "@type": "DataDownload",
+            "encodingFormat": "application/sql",
+            "name": "PostgreSQL Dump"
+          },
+          {
+            "@type": "DataDownload",
+            "encodingFormat": "application/x-parquet",
+            "name": "Apache Parquet"
+          },
+          {
+            "@type": "DataDownload",
+            "encodingFormat": "application/json",
+            "name": "JSON / JSONL"
+          },
+          {
+            "@type": "DataDownload",
+            "encodingFormat": "text/csv",
+            "name": "CSV / TSV"
+          }
+        ]
+      },
+      {
+        "@type": "Product",
+        "@id": "https://makarworld.github.io/fips-trademark-database/#product",
+        "name": "Полная база товарных знаков РФ (ФИПС / Роспатент)",
+        "image": "https://makarworld.github.io/fips-trademark-database/favicon.svg",
+        "description": "Актуальная база данных товарных знаков РФ в любом удобном формате. 3.3+ млн записей, 4 реестра (RUTM, WKTM, WOTM, RUTMAP), 10M+ PDF свидетельств и изображений логотипов.",
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "RUB",
+          "offerCount": "3",
+          "lowPrice": "15000",
+          "highPrice": "150000",
+          "priceValidUntil": "2027-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://t.me/makarworld"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "84"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://makarworld.github.io/fips-trademark-database/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Какие реестры входят в полную базу данных?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "В базу входят все 4 ключевых реестра ФИПС: RUTM (все товарные знаки и знаки обслуживания РФ), WKTM (общеизвестные в РФ товарные знаки), WOTM (международные товарные знаки с указанием РФ по Мадридской системе) и RUTMAP (все поданные и опубликованные заявки на регистрацию товарных знаков)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "В каких форматах предоставляется база данных?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "База поставляется в любом удобном для вас формате: дамп PostgreSQL (с готовыми индексами), ClickHouse, SQLite, Apache Parquet, JSON / JSONL, CSV / TSV, а также в виде S3-хранилища со всеми прикрепленными PDF-свидетельствами и изображениями логотипов в высоком разрешении."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Насколько данные актуальны и как настроить обновления?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "База собирается напрямую из открытых реестров Роспатента с непрерывной верификацией. Доступна как единовременная покупка полного среза, так и подписка на регулярные ежедневные или еженедельные инкрементальные обновления через API или облачный диск."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Как купить базу и получить тестовый сэмпл?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Свяжитесь с нами в Telegram (@makarworld). Мы бесплатно предоставим тестовую выборку данных (сэмпл в нужном вам формате) и структуру таблиц для проверки перед покупкой."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #090d16;
+      --bg-surface: #0f172a;
+      --bg-card: #141e33;
+      --bg-card-hover: #1a2744;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(99, 102, 241, 0.4);
+      --primary: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.35);
+      --accent: #6366f1;
+      --accent-alt: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient background glow */
+    .glow-bg {
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(59, 130, 246, 0.08) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header / Nav */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(16px);
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--primary-glow);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid var(--border-accent);
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #a5b4fc;
+      margin-bottom: 24px;
+    }
+
+    .badge-pulse {
+      width: 8px;
+      height: 8px;
+      background-color: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 10%, #a78bfa 50%, #f472b6 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.45);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: left;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-accent);
+    }
+
+    .stat-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #60a5fa;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* Formats Grid */
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 90px;
+    }
+
+    .format-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .format-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .format-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .format-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Registries Section */
+    .registries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 90px;
+    }
+
+    .registry-box {
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(20, 30, 51, 0.5) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+
+    .reg-code {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #60a5fa;
+      margin-bottom: 8px;
+    }
+
+    .reg-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .reg-detail {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Live Interactive Sample Table */
+    .sample-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      margin-bottom: 90px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .sample-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .filter-pill.active, .filter-pill:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .search-input {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      outline: none;
+      min-width: 260px;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: #60a5fa;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 14px 18px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* Use cases */
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 90px;
+    }
+
+    .case-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+    }
+
+    .case-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(99, 102, 241, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #818cf8;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .case-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .case-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Pricing Plans */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 90px;
+    }
+
+    .plan-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .plan-card.featured {
+      border-color: #6366f1;
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, var(--bg-card) 60%);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+    }
+
+    .featured-label {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+    }
+
+    .plan-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .plan-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+      min-height: 42px;
+    }
+
+    .plan-price {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .plan-price span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+    }
+
+    .plan-features li svg {
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    /* FAQ */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto 90px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.05rem;
+      user-select: none;
+    }
+
+    .faq-icon {
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 24px 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* Banner CTA */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(99, 102, 241, 0.25) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 60px 40px;
+      text-align: center;
+      margin-bottom: 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-banner p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 30px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .sample-section { padding: 20px; }
+      .cta-banner { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <svg viewBox="0 0 64 64" fill="none">
+          <defs>
+            <linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#3b82f6" />
+              <stop offset="100%" stop-color="#8b5cf6" />
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="16" fill="#0f172a" />
+          <path d="M32 12L48 18V32C48 42.5 41.2 50.8 32 54C22.8 50.8 16 42.5 16 32V18L32 12Z" fill="url(#nav-grad)" fill-opacity="0.2" stroke="url(#nav-grad)" stroke-width="3"/>
+          <circle cx="32" cy="32" r="10" stroke="#60a5fa" stroke-width="2.5" />
+          <path d="M29 27H33C34.1 27 35 27.9 35 29C35 30.1 34.1 31 33 31H29V27ZM29 31H32.5L35 37H32.8L30.6 32H29V37H27V27H29V31Z" fill="#fff" />
+        </svg>
+        <span>FIPS Registry DB</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#stats">Статистика</a></li>
+        <li><a href="#formats">Форматы</a></li>
+        <li><a href="#registries">Реестры</a></li>
+        <li><a href="#sample">Сэмпл данных</a></li>
+        <li><a href="#pricing">Тарифы</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <a href="https://t.me/makarworld" target="_blank" rel="noopener noreferrer" class="nav-cta">
+        <span>Купить базу</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="badge-pill">
+          <span class="badge-pulse"></span>
+          <span>База актуальна на сентябрь 2026 • Ежедневная синхронизация</span>
+        </div>
+
+        <h1>
+          Полная база товарных знаков РФ и ФИПС <br>
+          <span class="gradient-text">в любом удобном формате</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          3 300 000+ зарегистрированных знаков, заявок и общеизвестных брендов. 10 000 000+ оригинальных PDF-свидетельств и логотипов. Готовые дампы для PostgreSQL, ClickHouse, Parquet, JSON, CSV и прямой API.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://t.me/makarworld" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Запросить сэмпл и купить</span>
+          </a>
+          <a href="#sample" class="btn btn-secondary">
+            <span>Интерактивный просмотр</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid" id="stats">
+          <div class="stat-card">
+            <div class="stat-val">3.3M+</div>
+            <div class="stat-label">Товарных знаков и заявок в базе</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">4 Реестра</div>
+            <div class="stat-label">RUTM, WKTM, WOTM, RUTMAP</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">10M+</div>
+            <div class="stat-label">PDF свидетельств и логотипов</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">45 Классов</div>
+            <div class="stat-label">МКТУ с полным описанием товаров</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Available Formats -->
+    <section class="container" id="formats">
+      <div class="section-header">
+        <span class="section-tag">Интеграция без головной боли</span>
+        <h2 class="section-title">Готовые форматы поставки</h2>
+        <p class="section-desc">
+          Вам не нужно тратить месяцы на парсинг, обход DDoS-Guard, расшифровку ИНИД-полей и скачивание десятков терабайт. База полностью нормализована и готова к импорту.
+        </p>
+      </div>
+
+      <div class="formats-grid">
+        <div class="format-card">
+          <span class="format-badge">POSTGRESQL</span>
+          <h3 class="format-title">SQL Дамп (pg_dump)</h3>
+          <p class="format-desc">Чистая реляционная схема с B-Tree индексами по номерам/ИНН и GIN-индексами для полнотекстового поиска названий и классов МКТУ.</p>
+        </div>
+
+        <div class="format-card">
+          <span class="format-badge">CLICKHOUSE</span>
+          <h3 class="format-title">Колоночная СУБД</h3>
+          <p class="format-desc">Мгновенные аналитические запросы по миллионам записей. Агрегация по правообладателям, регионам и динамике регистраций за миллисекунды.</p>
+        </div>
+
+        <div class="format-card">
+          <span class="format-badge">PARQUET</span>
+          <h3 class="format-title">Apache Parquet</h3>
+          <p class="format-desc">Оптимально для Data Science, ML-моделей поиска сходства брендов, аналитики в Python (Pandas, Polars, DuckDB) и Apache Spark.</p>
+        </div>
+
+        <div class="format-card">
+          <span class="format-badge">JSON / JSONL</span>
+          <h3 class="format-title">JSON / Ndjson</h3>
+          <p class="format-desc">Сжатые архивы с полной вложенной структурой (списки авторов, поверенных, перечни МКТУ, прямые URL вложений). Идеально для NoSQL и ElasticSearch.</p>
+        </div>
+
+        <div class="format-card">
+          <span class="format-badge">CSV / EXCEL</span>
+          <h3 class="format-title">CSV / TSV (UTF-8 BOM)</h3>
+          <p class="format-desc">Плоские таблицы для загрузки в Excel, Google Таблицы, 1С или внутренние CRM/ERP системы юридических компаний.</p>
+        </div>
+
+        <div class="format-card">
+          <span class="format-badge">S3 / MEDIA</span>
+          <h3 class="format-title">Медиа-архив (PDF + Фото)</h3>
+          <p class="format-desc">Оригинальные официальные PDF-свидетельства Роспатента и изображения товарных знаков в высоком разрешении (~800 ГБ).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registries Covered -->
+    <section class="container" id="registries">
+      <div class="section-header">
+        <span class="section-tag">Охват данных</span>
+        <h2 class="section-title">4 Официальных реестра ФИПС</h2>
+        <p class="section-desc">
+          Полная база объединяет все действующие и архивные реестры товарных знаков РФ.
+        </p>
+      </div>
+
+      <div class="registries-grid">
+        <div class="registry-box">
+          <div class="reg-code">RUTM</div>
+          <div class="reg-name">Товарные знаки и знаки обслуживания РФ</div>
+          <div class="reg-detail">Все национальные свидетельства РФ: от первых номеров до самых свежих регистраций текущей недели.</div>
+        </div>
+
+        <div class="registry-box">
+          <div class="reg-code">WKTM</div>
+          <div class="reg-name">Общеизвестные в РФ товарные знаки</div>
+          <div class="reg-detail">Особый статус брендов с бессрочной защитой и расширенным правовым режимом.</div>
+        </div>
+
+        <div class="registry-box">
+          <div class="reg-code">WOTM</div>
+          <div class="reg-name">Международные знаки (Мадридская система)</div>
+          <div class="reg-detail">Зарубежные бренды, получившие правовую охрану на территории РФ через ВОИС (WIPO).</div>
+        </div>
+
+        <div class="registry-box">
+          <div class="reg-code">RUTMAP</div>
+          <div class="reg-name">Открытые заявки на регистрацию</div>
+          <div class="reg-detail">Заявки, находящиеся на формальной экспертизе и экспертизе по существу. Раннее выявление конкурентов.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Data Sample Section -->
+    <section class="container" id="sample">
+      <div class="sample-section">
+        <div class="section-header" style="margin-bottom: 24px;">
+          <span class="section-tag">Демонстрация структуры</span>
+          <h2 class="section-title" style="font-size: 2rem;">Интерактивный сэмпл базы данных</h2>
+          <p class="section-desc">Попробуйте поиск и фильтрацию по демонстрационному срезу данных</p>
+        </div>
+
+        <div class="sample-controls">
+          <div class="filter-pills">
+            <button class="filter-pill active" data-filter="ALL">Все реестры</button>
+            <button class="filter-pill" data-filter="RUTM">RUTM (РФ)</button>
+            <button class="filter-pill" data-filter="WKTM">WKTM (Общеизвестные)</button>
+            <button class="filter-pill" data-filter="RUTMAP">RUTMAP (Заявки)</button>
+            <button class="filter-pill" data-filter="WOTM">WOTM (Международные)</button>
+          </div>
+
+          <input type="text" id="sampleSearch" class="search-input" placeholder="Поиск по названию, правообладателю, номеру...">
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Реестр</th>
+                <th>№ Свидетельства / Заявки</th>
+                <th>Наименование знака</th>
+                <th>Статус</th>
+                <th>Правообладатель / Заявитель</th>
+                <th>Классы МКТУ</th>
+                <th>Срок действия</th>
+              </tr>
+            </thead>
+            <tbody id="sampleTableBody">
+              <!-- Dynamically populated from sample.json -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <span style="color: var(--text-dim); font-size: 0.85rem;">* В полной базе доступно более 25 дополнительных ИНИД-полей и прямые ссылки на вложения.</span>
+          <a href="sample.json" download="fips_sample.json" class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            <span>Скачать пример JSON (sample.json)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="container" id="use-cases">
+      <div class="section-header">
+        <span class="section-tag">Кому необходима база</span>
+        <h2 class="section-title">Для кого создано это решение</h2>
+        <p class="section-desc">Готовая база данных решает критические бизнес-задачи юридических, финансовых и продуктовых команд.</p>
+      </div>
+
+      <div class="use-cases-grid">
+        <div class="case-card">
+          <div class="case-icon">⚖️</div>
+          <h3 class="case-title">Патентные бюро и юристы</h3>
+          <p class="case-desc">Мгновенный локальный поиск сходства названий до степени смешения перед подачей заявок клиентов, анализ рисков отказа экспертов ФИПС.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">🛍️</div>
+          <h3 class="case-title">Маркетплейсы и селлеры</h3>
+          <p class="case-desc">Автоматическая пре-модерация брендов на Wildberries, Ozon, Мегамаркет. Защита от блокировок складов и исков патентных троллей.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">🚀</div>
+          <h3 class="case-title">Нейминг и брендинг</h3>
+          <p class="case-desc">Проверка доступности креативных названий и слоганов на этапе генерации идей, отсечение занятых обозначений в 45 классах МКТУ.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">📊</div>
+          <h3 class="case-title">Конкурентная разведка</h3>
+          <p class="case-desc">Отслеживание новых заявок конкурентов за месяцы до официального выхода новинок на рынок. Мониторинг портфелей интеллектуальной собственности.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">🏦</div>
+          <h3 class="case-title">Финтех и скоринг</h3>
+          <p class="case-desc">Оценка нематериальных активов компаний при выдаче кредитов, M&A сделках,Due Diligence и оценке капитализации технологического бизнеса.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">🤖</div>
+          <h3 class="case-title">LegalTech и AI-сервисы</h3>
+          <p class="case-desc">Обучение нейросетей векторному поиску сходства графических логотипов и текстовых названий. Готовый датасет для SaaS-решений.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing / Packages -->
+    <section class="container" id="pricing">
+      <div class="section-header">
+        <span class="section-tag">Условия приобретения</span>
+        <h2 class="section-title">Тарифные пакеты</h2>
+        <p class="section-desc">Выберите подходящий масштаб или закажите индивидуальную выгрузку по конкретным классам МКТУ и правообладателям.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="plan-card">
+          <div class="plan-name">Стандартный срез</div>
+          <div class="plan-desc">Единоразовый срез базы данных для локального анализа и интеграций.</div>
+          <div class="plan-price">от 35 000 ₽ <span>/ срез</span></div>
+          <ul class="plan-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Полный реестр RUTM или RUTMAP</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Формат на выбор: CSV, JSON, Parquet или SQL</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Все поля ИНИД и 45 классов МКТУ</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Прямые ссылки на оригиналы документов</span>
+            </li>
+          </ul>
+          <a href="https://t.me/makarworld" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Заказать срез</a>
+        </div>
+
+        <div class="plan-card featured">
+          <span class="featured-label">Популярный выбор</span>
+          <div class="plan-name">Все 4 Реестра PRO</div>
+          <div class="plan-desc">Полный массив всех товарных знаков, заявок и общеизвестных брендов.</div>
+          <div class="plan-price">от 75 000 ₽ <span>/ дамп</span></div>
+          <ul class="plan-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Все 4 реестра: RUTM, WKTM, WOTM, RUTMAP</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>3 300 000+ очищенных записей</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Готовые дампы PostgreSQL + ClickHouse</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Индексы полнотекстового поиска настроены</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>1 месяц бесплатных обновлений</span>
+            </li>
+          </ul>
+          <a href="https://t.me/makarworld" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Купить PRO версию</a>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-name">Enterprise + Media S3</div>
+          <div class="plan-desc">Полная инфраструктура с медиафайлами и регулярной синхронизацией.</div>
+          <div class="plan-price">Индивидуально</div>
+          <ul class="plan-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Все 4 реестра + полный архив вложений</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>10M+ PDF свидетельств и логотипов (~800 ГБ)</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Ежедневные / еженедельные инкременты данных</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Персональная техподдержка и SLA</span>
+            </li>
+          </ul>
+          <a href="https://t.me/makarworld" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Обсудить Enterprise</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="container" id="faq">
+      <div class="section-header">
+        <span class="section-tag">Вопросы и ответы</span>
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item open">
+          <div class="faq-question">
+            <span>Какие именно реестры включены в базу данных?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            База содержит 4 реестра: RUTM (все товарные знаки РФ), WKTM (общеизвестные знаки РФ), WOTM (международные знаки Мадридской системы, действующие в РФ) и RUTMAP (все зарегистрированные заявки на товарные знаки).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>В каком формате передаются данные?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Формат выбираете вы: дамп PostgreSQL (с готовыми таблицами и индексами), ClickHouse, Apache Parquet, JSON, CSV или SQLite. Также доступен архив медиафайлов (PDF документов и изображений логотипов в JPG/PNG).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Как организован обход защиты ФИПС при обновлениях?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Наш программный стек использует TLS-имперсонацию современного браузера, распределенный пул приватных прокси и двухэтапный сбор (discovery ссылок по сессионному дереву Payara + многопоточная выгрузка), что гарантирует 100% полноту данных без пропусков.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Можно ли получить бесплатный сэмпл для тестирования?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Да! Нажмите кнопку «Запросить сэмпл» или напишите в Telegram (@makarworld). Мы выгрузим для вас демонстрационную выборку по интересующим вас классам МКТУ или годам в нужном формате.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="container">
+      <div class="cta-banner">
+        <h2>Готовы получить базу товарных знаков?</h2>
+        <p>Свяжитесь с нами прямо сейчас. Предоставим демонстрационный срез, схему таблиц и ответим на все технические вопросы.</p>
+        <a href="https://t.me/makarworld" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 1.1rem; padding: 16px 36px;">
+          <span>Связаться в Telegram (@makarworld)</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <p>© 2026 FIPS Trademark Data Hub. Полная база данных товарных знаков и патентов РФ.</p>
+        <p style="margin-top: 4px; font-size: 0.8rem;">Информация агрегирована на основе открытых данных Федерального института промышленной собственности (ФИПС).</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://github.com/makarworld/fips-trademark-database" target="_blank" rel="noopener noreferrer">GitHub репозиторий</a></li>
+        <li><a href="sample.json">Sample Data</a></li>
+        <li><a href="https://t.me/makarworld" target="_blank" rel="noopener noreferrer">Telegram Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Interactive script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      let sampleData = [];
+
+      try {
+        const res = await fetch('sample.json');
+        sampleData = await res.json();
+      } catch (e) {
+        console.warn('Failed to fetch sample.json directly, fallback data loaded', e);
+      }
+
+      const tbody = document.getElementById('sampleTableBody');
+      const searchInput = document.getElementById('sampleSearch');
+      const filterPills = document.querySelectorAll('.filter-pill');
+
+      let currentFilter = 'ALL';
+      let currentQuery = '';
+
+      function renderTable() {
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const filtered = sampleData.filter(item => {
+          const matchFilter = (currentFilter === 'ALL' || item.registry === currentFilter);
+          if (!matchFilter) return false;
+          if (!currentQuery) return true;
+
+          const q = currentQuery.toLowerCase();
+          return (
+            (item.mark_name && item.mark_name.toLowerCase().includes(q)) ||
+            (item.holder && item.holder.toLowerCase().includes(q)) ||
+            (item.record_number && item.record_number.includes(q)) ||
+            (item.mktu_classes && item.mktu_classes.toLowerCase().includes(q))
+          );
+        });
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-dim); padding: 30px;">Ничего не найдено по вашему запросу</td></tr>';
+          return;
+        }
+
+        filtered.forEach(item => {
+          const tr = document.createElement('tr');
+          const isPending = item.status === 'на экспертизе';
+          const statusBadge = isPending
+            ? `<span class="badge-status badge-pending">На экспертизе</span>`
+            : `<span class="badge-status badge-active">Действует</span>`;
+
+          const numberDisplay = item.reg_number
+            ? `<strong>№ ${item.reg_number}</strong>`
+            : `<span style="color: var(--text-muted);">Заявка № ${item.app_number}</span>`;
+
+          tr.innerHTML = `
+            <td><strong style="color: #60a5fa; font-family: var(--font-mono);">${item.registry}</strong></td>
+            <td>${numberDisplay}</td>
+            <td><strong>${item.mark_name || '—'}</strong></td>
+            <td>${statusBadge}</td>
+            <td style="max-width: 250px;">${item.holder || '—'}</td>
+            <td style="max-width: 200px; font-size: 0.85rem; color: var(--text-muted);">${item.mktu_classes || '—'}</td>
+            <td>${item.expiry_date || '—'}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      renderTable();
+
+      // Search event
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentQuery = e.target.value;
+          renderTable();
+        });
+      }
+
+      // Filter events
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          filterPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentFilter = pill.getAttribute('data-filter') || 'ALL';
+          renderTable();
+        });
+      });
+
+      // FAQ accordion
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const q = item.querySelector('.faq-question');
+        if (q) {
+          q.addEventListener('click', () => {
+            const isOpen = item.classList.contains('open');
+            faqItems.forEach(i => i.classList.remove('open'));
+            if (!isOpen) {
+              item.classList.add('open');
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

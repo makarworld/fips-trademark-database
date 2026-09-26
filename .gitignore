@@ -1,0 +1,39 @@
+# Ignore everything by default
+*
+
+# Allow directory traversal
+!*/
+
+# Explicit deny list for security and clean repo
+fips_scraper.py
+kiot.txt
+proxies.txt
+PLAN.md
+sample_ids.json
+*.py
+*.pyc
+*.log
+*.txt
+*.csv
+out/
+data/
+data_proxy_test/
+data_test_parallel/
+fips_sample_data/
+__pycache__/
+.ai-memory/
+.claude/
+.cursor/
+.idea/
+.vscode/
+.venv/
+venv/
+
+# Whitelist repository showcase and GitHub Pages files
+!.gitignore
+!README.md
+!index.html
+!robots.txt
+!sitemap.xml
+!favicon.svg
+!sample.json
