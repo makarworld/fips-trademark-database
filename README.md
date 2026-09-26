@@ -8,7 +8,7 @@
 [![Updated](https://img.shields.io/badge/Updated-September%202026-success?style=for-the-badge)](https://makarworld.github.io/fips-trademark-database/)
 
 > 🌐 **Официальный сайт и интерактивный сэмпл:** [makarworld.github.io/fips-trademark-database](https://makarworld.github.io/fips-trademark-database/)  
-> 💬 **Связаться и запросить бесплатный сэмпл / купить базу:** Telegram [@makarworld](https://t.me/makarworld)
+> 💬 **Связаться и запросить бесплатный сэмпл / купить базу:** Telegram [@abuztrade](https://t.me/abuztrade)
 
 ---
 
@@ -148,7 +148,7 @@ LIMIT 20;
 
 ## 🤝 Как купить и получить демо-сэмпл
 
-1. Напишите нам в Telegram: **[@makarworld](https://t.me/makarworld)**.
+1. Напишите нам в Telegram: **[@abuztrade](https://t.me/abuztrade)**.
 2. Укажите желаемый формат (PostgreSQL, ClickHouse, Parquet, JSON, CSV или S3 архив).
 3. Мы предоставим **бесплатную тестовую выборку (сэмпл)** по интересующим вас классам или реестрам для проверки совместимости с вашими системами.
 4. После согласования передаем полный архив через защищенное облачное хранилище или настраиваем регулярную синхронизацию.
